@@ -11,6 +11,6 @@ import java.util.Set;
 @Builder
 public final class Product {
 	private final Long id;
-	private Integer sequence;
+	@Builder.Default private Integer sequence = 0;
 	@Builder.Default private Set<Size> sizes = new HashSet<>();
 }
