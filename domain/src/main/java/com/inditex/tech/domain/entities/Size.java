@@ -9,7 +9,6 @@ import java.util.Optional;
 @Builder
 public final class Size {
 	private final Long id;
-	private Product product;
 	private boolean backSoon;
 	private boolean special; // it depends on product if this attribute can be modifiable or not
 	@Builder.Default private Optional<Stock> stock = Optional.empty();

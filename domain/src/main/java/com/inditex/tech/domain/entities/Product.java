@@ -3,6 +3,7 @@ package com.inditex.tech.domain.entities;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -11,5 +12,5 @@ import java.util.Set;
 public final class Product {
 	private final Long id;
 	private Integer sequence;
-	private Set<Size> sizes;
+	@Builder.Default private Set<Size> sizes = new HashSet<>();
 }
