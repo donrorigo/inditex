@@ -1,0 +1,3 @@
+spring:
+  liquibase:
+    change-log: infrastructure/adapter-repository-postgres/src/main/resources/db/changelog/db.changelog-master.yaml

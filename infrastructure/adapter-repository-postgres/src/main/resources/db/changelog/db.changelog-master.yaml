@@ -1,0 +1,107 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Rodrigo Puerto
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: sequence
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: Rodrigo Puerto
+      changes:
+        - createTable:
+            tableName: size
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: back_soon
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: special
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stock_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 3
+      author: Rodrigo Puerto
+      changes:
+        - createTable:
+            tableName: stock
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: quantity
+                  type: int
+                  constraints:
+                    nullable: false
+                    min: 0
+              - column:
+                  name: size_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 4
+      author: Rodrigo Puerto
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: size
+            baseColumnNames: stock_id
+            referencedTableName: stock
+            referencedColumnNames: id
+            constraintName: fk_size_stock_id
+
+  - changeSet:
+      id: 5
+      author: Rodrigo Puerto
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: stock
+            baseColumnNames: size_id
+            referencedTableName: size
+            referencedColumnNames: id
+            constraintName: fk_stock_size_id
+  - changeSet:
+      id: 6
+      author: me
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: size
+            baseColumnNames: product_id
+            referencedTableName: product
+            referencedColumnNames: id
+            constraintName: fk_size_product_id
