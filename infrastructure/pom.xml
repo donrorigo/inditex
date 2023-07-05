@@ -12,6 +12,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>adapter-api</module>
+    <module>adapter-repository</module>
   </modules>
   <artifactId>infrastructure</artifactId>
 
