@@ -17,6 +17,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
+
   - changeSet:
       id: 2
       author: Rodrigo Puerto
@@ -40,15 +41,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: stock_id
-                  type: bigint
-                  constraints:
-                    nullable: true
-              - column:
                   name: product_id
                   type: bigint
                   constraints:
                     nullable: true
+
+
 
   - changeSet:
       id: 3
@@ -58,46 +56,96 @@ databaseChangeLog:
             tableName: stock
             columns:
               - column:
-                  name: id
+                  name: size_id
                   type: bigint
                   constraints:
                     primaryKey: true
               - column:
                   name: quantity
                   type: int
+                  defaultValueNumeric: 0
                   constraints:
                     nullable: false
                     min: 0
-              - column:
-                  name: size_id
-                  type: bigint
-                  constraints:
-                    nullable: true
+
 
   - changeSet:
       id: 4
       author: Rodrigo Puerto
       changes:
-        - addForeignKeyConstraint:
-            baseTableName: size
-            baseColumnNames: stock_id
-            referencedTableName: stock
-            referencedColumnNames: id
-            constraintName: fk_size_stock_id
+        - loadData:
+            file: classpath:data/product.csv
+            tableName: product
+            separator: ', '
+            primaryKey: id
+            columns:
+              - column:
+                  index: 0
+                  name: id
+                  type: NUMERIC
+              - column:
+                  index: 1
+                  name: sequence
+                  type: NUMERIC
 
   - changeSet:
       id: 5
       author: Rodrigo Puerto
       changes:
-        - addForeignKeyConstraint:
-            baseTableName: stock
-            baseColumnNames: size_id
-            referencedTableName: size
-            referencedColumnNames: id
-            constraintName: fk_stock_size_id
+        - loadData:
+            file: classpath:data/size-1.csv
+            tableName: size
+            separator: ', '
+            columns:
+              - column:
+                  index: 0
+                  name: id
+                  type: NUMERIC
+              - column:
+                  index: 1
+                  name: product_id
+                  type: NUMERIC
+              - column:
+                  index: 2
+                  name: back_soon
+                  type: BOOLEAN
+              - column:
+                  index: 3
+                  name: special
+                  type: BOOLEAN
+
   - changeSet:
       id: 6
-      author: me
+      author: Rodrigo Puerto
+      changes:
+        - loadData:
+            file: classpath:data/stock.csv
+            tableName: stock
+            separator: ', '
+            columns:
+              - column:
+                  index: 0
+                  name: size_id
+                  type: NUMERIC
+              - column:
+                  index: 1
+                  name: quantity
+                  type: NUMERIC
+
+  - changeSet:
+      id: 7
+      author: Rodrigo Puerto
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: size
+            baseColumnNames: id
+            referencedTableName: stock
+            referencedColumnNames: size_id
+            constraintName: fk_size_stock_id
+
+  - changeSet:
+      id: 8
+      author: Rodrigo Puerto
       changes:
         - addForeignKeyConstraint:
             baseTableName: size

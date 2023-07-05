@@ -63,6 +63,7 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
+          <include>db.changelog.data.product.csv</include>
           <include>**/*</include>
         </includes>
       </resource>
