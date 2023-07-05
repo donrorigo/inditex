@@ -4,11 +4,13 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Optional;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public final class Size {
-	private final Long id;
+	@EqualsAndHashCode.Include private final Long id;
 	@Builder.Default private boolean backSoon = false;
 	@Builder.Default private boolean special = false; // it depends on product if this attribute can be modifiable or not
 	@Builder.Default private Optional<Stock> stock = Optional.empty();
@@ -21,4 +23,6 @@ public final class Size {
 	public Boolean doWeHaveStock(){
 		return this.stock.map(presentStock -> presentStock.getQuantity() > 0).orElse(false);
 	}
+
+
 }
