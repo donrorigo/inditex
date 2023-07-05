@@ -35,7 +35,7 @@
     </dependency>
     <dependency>
       <groupId>com.inditex.tech</groupId>
-      <artifactId>adapter-repository</artifactId>
+      <artifactId>adapter-repository-postgres</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

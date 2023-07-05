@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -19,6 +20,7 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
   private final ProductRepository repository;
 
   @Override
+  @Transactional(readOnly = true)
   public Collection<Product> execute() {
     log.debug("Executing the use case for products that have stock");
     final var products = this.repository.findProducts();
