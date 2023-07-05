@@ -16,35 +16,34 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilterUseCase {
 
-	private final ProductRepository repository;
+  private final ProductRepository repository;
 
-	@Override
-	public Collection<Product> execute () {
-		final var products = this.repository.findProducts();
-		return products.stream()
-				.filter(this::productIsVisible)
-				.sorted(Comparator.comparingInt(Product::getSequence))
-				.toList();
-	}
+  @Override
+  public Collection<Product> execute() {
+    log.debug("Executing the use case for products that have stock");
+    final var products = this.repository.findProducts();
+    return products.stream()
+        .filter(this::productIsVisible)
+        .sorted(Comparator.comparingInt(Product::getSequence))
+        .toList();
+  }
 
-	/**
-	 * Checks if the specified product has any available stock, or it's back soon.
-	 * Also, in the special sizes cases, it only returns {@code true} if there are
-	 * special and non-special sizes.
-	 *
-	 * @param product the product to check
-	 * @return {@code true} if the product has stock, {@code false} otherwise
-	 */
-	private boolean productIsVisible(final Product product) {
-
-		final var sizes = product.getSizes()
-				.stream()
-				.filter(size -> size.isBackSoon() || size.getStock().isPresent())
-				.map(Size::isSpecial)
-				.distinct()
-				.toList();
-
-		return sizes.stream().anyMatch(special -> special.equals(false)) || sizes.size() > 1L;
-	}
+  /**
+   * Checks if the specified product has any available stock, or it's back soon. Also, in the
+   * special sizes cases, it only returns {@code true} if there are special and non-special sizes.
+   *
+   * @param product the product to check
+   * @return {@code true} if the product has stock, {@code false} otherwise
+   */
+  private boolean productIsVisible(final Product product) {
+    log.debug("Checking if the product {} can be visible", product.getId());
+    final var sizes = product.getSizes()
+        .stream()
+        .filter(size -> size.isBackSoon() || size.getStock().isPresent())
+        .map(Size::isSpecial)
+        .distinct()
+        .toList();
+    return sizes.stream().anyMatch(special -> special.equals(false)) || sizes.size() > 1L;
+  }
 
 }
