@@ -8,18 +8,18 @@ import jakarta.persistence.Table;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
+@Getter
 @Builder
 @Entity
-@Table(name = "product")
+@Table(name = "product", schema = "public")
 public final class ProductEntity {
   @Id
-  private final Long id;
-
+  private Long id;
   @Column(name = "sequence", nullable = false)
   private Integer sequence;
-
-  @OneToMany
+  @OneToMany(mappedBy = "product", targetEntity = SizeEntity.class)
   private Set<SizeEntity> sizes;
 }
