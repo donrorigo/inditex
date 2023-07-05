@@ -39,7 +39,7 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
     log.debug("Checking if the product {} can be visible", product.getId());
     final var sizes = product.getSizes()
         .stream()
-        .filter(size -> size.isBackSoon() || size.getStock().isPresent())
+        .filter(size -> size.isBackSoon() || size.doWeHaveStock())
         .map(Size::isSpecial)
         .distinct()
         .toList();
