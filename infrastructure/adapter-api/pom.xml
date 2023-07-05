@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.inditex.tech</groupId>
+    <artifactId>infrastructure</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>adapter-api</artifactId>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.inditex.tech</groupId>
+      <artifactId>domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.inditex.tech</groupId>
+      <artifactId>application</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>${springdoc-openapi-ui.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.0.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>
+                ${project.basedir}/src/main/resources/api.yaml
+              </inputSpec>
+              <generatorName>spring</generatorName>
+              <apiPackage>com.inditex.tech.infrastructure.adapter-api</apiPackage>
+              <modelPackage>com.inditex.tech.infrastructure.adapter-api.model</modelPackage>
+              <generateApis>true</generateApis>
+              <modelNameSuffix>Dto</modelNameSuffix>
+              <generateSupportingFiles>true</generateSupportingFiles>
+              <configOptions>
+                <library>spring-boot</library>
+                <serializationLibrary>jackson</serializationLibrary>
+                <additionalModelTypeAnnotations>@lombok.NoArgsConstructor @lombok.experimental.SuperBuilder</additionalModelTypeAnnotations>
+                <delegatePattern>true</delegatePattern>
+                <interfaceOnly>true</interfaceOnly>
+                <useSpringBoot3>true</useSpringBoot3>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
