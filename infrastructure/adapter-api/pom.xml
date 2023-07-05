@@ -34,9 +34,8 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-      <version>${springdoc-openapi-ui.version}</version>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
     </dependency>
   </dependencies>
 
@@ -62,6 +61,7 @@
               <modelNameSuffix>Dto</modelNameSuffix>
               <generateSupportingFiles>true</generateSupportingFiles>
               <configOptions>
+                <documentationProvider>none</documentationProvider>
                 <library>spring-boot</library>
                 <serializationLibrary>jackson</serializationLibrary>
                 <additionalModelTypeAnnotations>@lombok.NoArgsConstructor @lombok.experimental.SuperBuilder</additionalModelTypeAnnotations>
