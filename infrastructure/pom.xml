@@ -12,7 +12,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>adapter-api</module>
-    <module>adapter-repository</module>
+    <module>adapter-repository-files</module>
+    <module>adapter-repository-postgres</module>
   </modules>
   <artifactId>infrastructure</artifactId>
 
