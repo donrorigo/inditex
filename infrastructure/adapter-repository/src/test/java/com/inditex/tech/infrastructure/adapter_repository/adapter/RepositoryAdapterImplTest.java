@@ -3,7 +3,6 @@ package com.inditex.tech.infrastructure.adapter_repository.adapter;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.inditex.tech.domain.entities.Product;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
