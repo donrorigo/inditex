@@ -1,5 +1,6 @@
 package com.inditex.tech.adapter_repository_postgres.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,12 +8,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @Entity
+@NoArgsConstructor
 @Table(name = "size", schema = "public")
 public class SizeEntity {
   @Id
@@ -21,9 +22,9 @@ public class SizeEntity {
   private boolean backSoon;
   @Column(name = "special", nullable = false)
   private boolean special;
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "id")
   private StockEntity stock;
   @ManyToOne(targetEntity = ProductEntity.class)
-  @JoinColumn(name = "product_id")
   private ProductEntity product;
 }
