@@ -133,14 +133,14 @@ class FindProductsStockFilterUseCaseImplTest {
     final var productA = Product.builder()
         .id(1L)
         .sizes(
-            Set.of(Size.builder().backSoon(true).special(true).build(),
-                Size.builder().stock(Optional.of(Stock.builder().quantity(10).build())).build()))
+            Set.of(Size.builder().id(1L).productId(1L).backSoon(true).special(true).build(),
+                Size.builder().id(2L).productId(1L).stock(Optional.of(Stock.builder().quantity(10).build())).build()))
         .build();
 
     final var productB = Product.builder()
         .id(2L)
         .sizes(
-            Set.of(Size.builder().build()))
+            Set.of(Size.builder().id(1L).productId(2L).build()))
         .build();
 
     final List<Product> products = List.of(productA, productB);
@@ -163,14 +163,14 @@ class FindProductsStockFilterUseCaseImplTest {
     final var productA = Product.builder()
         .id(1L)
         .sizes(
-            Set.of(Size.builder().backSoon(true).special(true).build(),
-                Size.builder().backSoon(true).build()))
+            Set.of(Size.builder().id(1L).productId(1L).backSoon(true).special(true).build(),
+                Size.builder().id(2L).productId(1L).backSoon(true).build()))
         .build();
 
     final var productB = Product.builder()
         .id(2L)
         .sizes(
-            Set.of(Size.builder().build()))
+            Set.of(Size.builder().id(1L).productId(2L).build()))
         .build();
 
     final List<Product> products = List.of(productA, productB);
