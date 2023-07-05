@@ -41,6 +41,7 @@ class FindProductsStockFilterUseCaseImplTest {
         .sequence(1)
         .sizes(
             Set.of(Size.builder().stock(Optional.of(Stock.builder()
+                    .quantity(123)
                 .build())).build()))
         .build();
 
@@ -48,6 +49,7 @@ class FindProductsStockFilterUseCaseImplTest {
         .id(2L)
         .sizes(
             Set.of(Size.builder().stock(Optional.of(Stock.builder()
+                    .quantity(2)
                 .build())).build()))
         .build();
 
@@ -73,6 +75,7 @@ class FindProductsStockFilterUseCaseImplTest {
         .id(1L)
         .sizes(
             Set.of(Size.builder().stock(Optional.of(Stock.builder()
+                    .quantity(1)
                 .build())).build()))
         .build();
 
@@ -131,7 +134,7 @@ class FindProductsStockFilterUseCaseImplTest {
         .id(1L)
         .sizes(
             Set.of(Size.builder().backSoon(true).special(true).build(),
-                Size.builder().stock(Optional.of(Stock.builder().build())).build()))
+                Size.builder().stock(Optional.of(Stock.builder().quantity(10).build())).build()))
         .build();
 
     final var productB = Product.builder()
