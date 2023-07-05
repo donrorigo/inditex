@@ -32,6 +32,7 @@ public class RepositoryAdapterImpl implements ProductRepository {
                     .filter(sizeEntity -> sizeEntity.getProductId().equals(productEntity.getId()))
                     .map(sizeEntity -> Size.builder()
                         .id(sizeEntity.getId())
+                        .productId(productEntity.getId())
                         .backSoon(sizeEntity.isBackSoon())
                         .special(sizeEntity.isSpecial())
                         .stock(stocks.stream()

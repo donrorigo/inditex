@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public final class Size {
 	@EqualsAndHashCode.Include private final Long id;
+	@EqualsAndHashCode.Include private final Long productId;
 	@Builder.Default private boolean backSoon = false;
 	@Builder.Default private boolean special = false; // it depends on product if this attribute can be modifiable or not
 	@Builder.Default private Optional<Stock> stock = Optional.empty();
