@@ -5,6 +5,7 @@ import com.inditex.tech.application.ports.output.ProductRepository;
 import com.inditex.tech.domain.entities.Product;
 import com.inditex.tech.domain.entities.Size;
 import java.util.Comparator;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,9 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
     final var products = this.repository.findProducts();
     return products.stream()
         .filter(this::productIsVisible)
-        .sorted(Comparator.comparingInt(Product::getSequence))
-        .toList();
+        .collect(Collectors.toCollection(
+            () -> new TreeSet<>(Comparator.comparingInt(Product::getSequence))
+        ));
   }
 
   /**

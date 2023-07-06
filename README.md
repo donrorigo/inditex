@@ -34,20 +34,21 @@ As I read in the documentation that you passed to me, you ask for two things:
 for the sizes because the set option doesn't allow duplicates. Also, we don't want to have an insertion order in these sizes. So, in my opinion, this 
 structure is the best for this domain.
 - **Temporal Complexity**: The temporal complexity of the `FindProductsStockFilterUseCase` implementation can be analyzed by examining the time complexity of each operation performed within the algorithm. 
-  1. **Finding products**: The time complexity of `this.repository.findProducts()` depends on the implementation of the `findProducts()` method in the `repository` object. This will vary in the future, as soon as we choose the correct database.
-  2. **Filtering products**: The `filter` operation in the `productIsVisible` method iterates through each product and checks if it meets the visibility criteria. The time complexity of this operation is O(n), where n is the number of products.
-  3. **Sorting products**: The `sorted` operation in the `execute` method sorts the filtered products based on their sequence. The time complexity of this operation is O(n log n), where n is the number of filtered products.
-  4. **Converting to List**: The `toList` operation collects the sorted products into a List. This operation has a time complexity of O(n), where n is the number of sorted products.
-  5. **Checking product visibility**: The `productIsVisible` method performs various operations on the sizes of the product. Let's analyze them one by one:
+  - In the `execute()` method:
+    - **Retrieving products from the repository**: The time complexity of this operation is assumed to be O(1) because it depends on the implementation that we choose. It depends on the
+    database chosen and the way we have to extract data.
+    - **Filtering products**: The `filter()` operation in the stream iterates through each product and applies the productIsVisible() method as a predicate. The time complexity of this operation is O(n), where n is the number of products. 
+    - **Collecting products**: The `collect()` operation collects the filtered products into a TreeSet using Collectors.toCollection(). The TreeSet maintains a sorted order based on the sequence of the products, so the time complexity of this operation is O(n log n), where n is the number of products. 
+  
+  - In the `productIsVisible()` method:
+    - **Filtering sizes**: The `filter()` operation in the stream iterates through each size and applies the predicate size -> size.isBackSoon() || size.doWeHaveStock(). The time complexity of this operation depends on the number of sizes associated with the product and can be approximated as O(m), where m is the number of sizes. 
+    - **Mapping sizes**: The `map()` operation transforms each size to a boolean value using Size::isSpecial. This operation has a time complexity of O(m). 
+    - **Collecting sizes**: The `collect()` operation collects the mapped boolean values into an unmodifiable Set. The time complexity of this operation is O(m). 
+    - Considering these operations, the time complexity of the productIsVisible() method can be approximated as O(m), where m is the number of sizes associated with the product.
 
-      - Filtering sizes: The `filter` operation in `product.getSizes().stream()` iterates through each size and filters out the ones that are back soon or have stock. The time complexity of this operation is O(m), where m is the number of sizes in a product.
-      - Mapping sizes: The `map` operation in `map(Size::isSpecial)` applies the `isSpecial` method to each size. The time complexity of this operation is O(m), where m is the number of sizes in a product.
-      - Collecting sizes: The collect() operation collects the mapped boolean values into a Set. It creates a new Set and adds the boolean values to it. The time complexity of this operation is O(m), where m is the number of sizes. 
-      - Checking conditions: The remaining operations (anyMatch() and size()) iterate through the collected boolean values and perform certain checks. The anyMatch() operation checks if any of the boolean values are false, and the size() operation checks the number of boolean values in the Set. These operations have a time complexity of O(m), where m is the number of sizes.
+In summary, the overall time complexity of the updated algorithm can be approximated as `O(n log n + m)`, where n is the number of products and m is the number of sizes associated with each product.
 
-
-
-  > Overall, the algorithm has a time complexity of `O(n + n log n + m)`, where **n** is the number of products and **m** is the average number of sizes per product. 
+> Note: The TreeSet used in the collect() operation has an additional space complexity of O(n) to store the sorted set of products.
 
 ## Architecture Overview
 
