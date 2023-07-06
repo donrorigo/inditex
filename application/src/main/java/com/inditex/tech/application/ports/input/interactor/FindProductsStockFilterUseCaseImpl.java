@@ -5,6 +5,7 @@ import com.inditex.tech.application.ports.output.ProductRepository;
 import com.inditex.tech.domain.entities.Product;
 import com.inditex.tech.domain.entities.Size;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,7 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
         .stream()
         .filter(size -> size.isBackSoon() || size.doWeHaveStock())
         .map(Size::isSpecial)
-        .distinct()
-        .toList();
+        .collect(Collectors.toUnmodifiableSet());
     return sizes.stream().anyMatch(special -> special.equals(false)) || sizes.size() > 1L;
   }
 
