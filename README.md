@@ -58,7 +58,8 @@ Here you can find a simple diagram that explains the number of input and output 
 
 ## Usage
 
-This project has been built using `Amazon Corretto 17.0.7` in its `Intel` distribution. Also, the maven version used was the `3.8.1`.
+You need to go to the path `main/src/test/java/com/inditex/tech/main/contract/TestApplication.java` to run the microservice. As it is working with testcontainers
+you must have installed and running Docker in your machine.
 
 ## Testing
 
