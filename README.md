@@ -41,14 +41,11 @@ structure is the best for this domain.
   5. **Checking product visibility**: The `productIsVisible` method performs various operations on the sizes of the product. Let's analyze them one by one:
 
       - Filtering sizes: The `filter` operation in `product.getSizes().stream()` iterates through each size and filters out the ones that are back soon or have stock. The time complexity of this operation is O(m), where m is the number of sizes in a product.
-
       - Mapping sizes: The `map` operation in `map(Size::isSpecial)` applies the `isSpecial` method to each size. The time complexity of this operation is O(m), where m is the number of sizes in a product.
+      - Collecting sizes: The collect() operation collects the mapped boolean values into a Set. It creates a new Set and adds the boolean values to it. The time complexity of this operation is O(m), where m is the number of sizes. 
+      - Checking conditions: The remaining operations (anyMatch() and size()) iterate through the collected boolean values and perform certain checks. The anyMatch() operation checks if any of the boolean values are false, and the size() operation checks the number of boolean values in the Set. These operations have a time complexity of O(m), where m is the number of sizes.
 
-      - Distinct sizes: The `distinct` operation eliminates duplicate special size values. The time complexity of this operation is O(m), where m is the number of distinct sizes.
 
-      - Converting to List: The `toList` operation collects the distinct sizes into a List. This operation has a time complexity of O(m), where m is the number of distinct sizes.
-
-      - Any match or size check: The `anyMatch` operation and the `sizes.size()` check both have a time complexity of O(m), where m is the number of distinct sizes.
 
   > Overall, the algorithm has a time complexity of `O(n + n log n + m)`, where **n** is the number of products and **m** is the average number of sizes per product. 
 
