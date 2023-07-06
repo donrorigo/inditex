@@ -28,9 +28,7 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
     final var products = this.repository.findProducts();
     return products.stream()
         .filter(this::productIsVisible)
-        .collect(Collectors.toCollection(
-            () -> new TreeSet<>(Comparator.comparingInt(Product::getSequence))
-        ));
+        .collect(Collectors.toCollection(TreeSet::new));
   }
 
   /**
