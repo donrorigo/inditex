@@ -140,7 +140,7 @@ class FindProductsStockFilterUseCaseImplTest {
     final var productB = Product.builder()
         .id(2L)
         .sizes(
-            Set.of(Size.builder().id(1L).productId(2L).build()))
+            Set.of(Size.builder().id(1L).productId(2L).backSoon(true).build()))
         .build();
 
     final List<Product> products = List.of(productA, productB);
@@ -151,7 +151,7 @@ class FindProductsStockFilterUseCaseImplTest {
     // then
     final var storedProducts = assertDoesNotThrow(() -> this.useCase.execute());
     assertFalse(storedProducts.isEmpty(), "The products are coming empty");
-    assertEquals(1, storedProducts.size(),
+    assertEquals(2, storedProducts.size(),
         "We are not receiving the correct number of products from database");
   }
 

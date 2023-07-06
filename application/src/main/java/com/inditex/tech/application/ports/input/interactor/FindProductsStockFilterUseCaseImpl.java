@@ -45,7 +45,9 @@ public class FindProductsStockFilterUseCaseImpl implements FindProductsStockFilt
         .filter(size -> size.isBackSoon() || size.doWeHaveStock())
         .map(Size::isSpecial)
         .collect(Collectors.toUnmodifiableSet());
-    return sizes.stream().anyMatch(special -> special.equals(false)) || sizes.size() > 1L;
+
+    return (sizes.stream().anyMatch(special -> special.equals(true))) ? sizes.size() > 1
+        : !sizes.isEmpty();
   }
 
 }
