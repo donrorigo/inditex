@@ -1,0 +1,13 @@
+request:
+  method: GET
+  url: /products?stock=false
+  headers:
+    Content-Type: application/json
+response:
+  status: 200
+  body:
+    - 1
+    - 2
+    - 3
+  headers:
+    Content-Type: application/json
