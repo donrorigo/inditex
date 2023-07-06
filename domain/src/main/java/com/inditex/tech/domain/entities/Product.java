@@ -18,6 +18,10 @@ public final class Product implements Comparable<Product>{
 
 	@Override
 	public int compareTo(Product product) {
-		return Integer.compare(this.sequence, product.getSequence());
+		int sequenceComparison = Integer.compare(this.sequence, product.getSequence());
+		if (sequenceComparison == 0) {
+			return Long.compare(this.id, product.getId());
+		}
+		return sequenceComparison;
 	}
 }
