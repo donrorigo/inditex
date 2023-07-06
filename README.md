@@ -63,5 +63,9 @@ you must have installed and running Docker in your machine.
 
 ## Testing
 
-The testing that have been applied was unitary using `JUnit5` and `Mockito`. 
+- **Unit testing**: You have an integration testing example in the application layer (I didn't create all test cases in every class of the project because
+of time). Here you will find tests with JUnit5 and Mockito.
+- **Contract testing**: You can find the integration with Spring Cloud contract in the adapter-api module. Here you will find the tests associated with this type of testing.
+- **Integration testing**: You can find the integration testing using Testcontainers in the main module, here I'm checking if the microservice is connecting well with the database, 
+and also it's checking the microservice correct functionality.
 
